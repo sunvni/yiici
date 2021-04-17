@@ -29,14 +29,24 @@ class SeederController extends Controller
     {
         $faker = \Faker\Factory::create();
         for ($i = 0; $i < $this->count; $i++) {
-            $post = new Post();
-            $post->title = $this->title ?: $faker->sentence();
-            $post->short = $this->short ?: $faker->sentence();
-            $post->created_by = $this->created_by ?: 100;
-            $post->featured = boolval($this->featured);
-            $post->content = $faker->paragraph();
-    
-            $post->save();
+            try {
+                $post = new Post();
+                $post->title = $this->title ?: $faker->sentence();
+                $post->short = $this->short ?: $faker->sentence();
+                $post->created_by = $this->created_by ?: 100;
+                $post->featured = boolval($this->featured);
+                $post->content = implode("", array_map(function($item) {
+                        return "<p>" . $item . "</p>";
+                    },
+                    $faker->paragraphs(60)
+                ));
+                $post->save();
+                if ($post->refresh()) {
+                    echo "Create Post $post->id" . PHP_EOL;
+                }
+            } catch (\Exception $e) {
+                var_dump($e); die;
+            }
         }
     }
 }
