@@ -2,7 +2,7 @@ pipeline {
      agent {
         node {
             label 'yiici'
-            customWorkspace '/home/work'
+            customWorkspace '/home/root/workspace'
         }
     }
     options { timestamps () }
