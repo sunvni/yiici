@@ -6,11 +6,20 @@ pipeline {
         }
     }
     options { timestamps () }
-
     stages {
-        stage('Example Build') {
+        stage('Build') {
             steps {
-                sh 'php --version'        
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
