@@ -1,6 +1,7 @@
 pipeline {
      agent {
         node {
+            label 'EB_TEST_SEL'
             customWorkspace '/home/yiici'
         }
     }
