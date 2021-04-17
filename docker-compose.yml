@@ -6,4 +6,17 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./:/app:delegated
     ports:
-      - '8000:80'
+      - '80:80'
+  mysql:
+    image: circleci/mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ubuntu
+      MYSQL_DATABASE: yiici
+      MYSQL_USER: yiici
+      MYSQL_PASSWORD: yiici 
+  redis:
+    image: circleci/redis
+    ports:
+      - "6379:6379"
