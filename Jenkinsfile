@@ -2,7 +2,6 @@ pipeline {
      agent {
         node {
             label 'yiici'
-            customWorkspace '/home/sunvni/workspace'
         }
     }
     options { timestamps () }
