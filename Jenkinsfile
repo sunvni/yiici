@@ -11,17 +11,21 @@ pipeline {
 
     stages {
         stage("Clone From GitHub") {
-            checkout(
-                [$class: 'GitSCM', branches: [[name: '*/${params.GIT_BRANCH}']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[url: 'https://github.com/sunvni/yiici.git']]]
-            )
+           steps {
+                checkout(
+                    [$class: 'GitSCM', branches: [[name: '*/${params.GIT_BRANCH}']],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [],
+                        submoduleCfg: [],
+                        userRemoteConfigs: [[url: 'https://github.com/sunvni/yiici.git']]]
+                )
+           }
         }
         stage('Composer Install') {
-            dir("yiici/") {
-                sh 'composer install --ignore-platform-reqs'
+            steps {
+                dir("yiici/") {
+                    sh 'composer install --ignore-platform-reqs'
+                }
             }
         }
         stage('Build') {
