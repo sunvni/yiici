@@ -1,5 +1,5 @@
 pipeline {
-    agent { label: 'yiici'}
+    agent { label 'yiici'}
     options { timestamps () }
     stages {
         stage('Build') {
