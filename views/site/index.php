@@ -47,7 +47,7 @@ $this->title = 'My Yii Application';
         <div class="row">
             <div class="col-md-8 blog-main">
                 <?php foreach ($posts as $key => $post) {
-                    echo $this->render('..\layouts\partials\card', compact('post'));
+                    echo $this->render('//layouts/partials/card', compact('post'));
                 }
                 ?>
             </div><!-- /.blog-main -->
