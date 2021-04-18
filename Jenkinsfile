@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage("Clean Workspace before build") {
             steps {
+                sh "sudo docker-compose down"
                 cleanWs()
             }
         }
