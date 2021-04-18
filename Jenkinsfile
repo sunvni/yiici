@@ -10,12 +10,6 @@ pipeline {
     parameters { string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'branch to deploy') }
 
     stages {
-        stage("Clean Workspace before build") {
-            steps {
-                sh "sudo docker-compose down"
-                cleanWs()
-            }
-        }
         stage("Clone From GitHub") {
            steps {
                 checkout(
@@ -31,7 +25,6 @@ pipeline {
             steps {
                 sh "sudo docker-compose build"
                 sh "sudo docker-compose up -d"
-
             }
         }
         stage('Composer Install') {
