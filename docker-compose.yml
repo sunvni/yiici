@@ -15,8 +15,12 @@ services:
       MYSQL_ROOT_PASSWORD: ubuntu
       MYSQL_DATABASE: yiici
       MYSQL_USER: yiici
-      MYSQL_PASSWORD: yiici 
+      MYSQL_PASSWORD: yiici
+    volumes: 
+      - "mysql-data:/var/lib/mysql:rw"
   redis:
     image: circleci/redis
     ports:
       - "6379:6379"
+volumes:
+  mysql-data: {}
