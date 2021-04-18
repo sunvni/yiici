@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh "sudo docker-compose exec workspace_php_1 composer run-script test"
+                sh "sudo docker-compose exec yiici_php_1 composer run-script test"
             }
         }
         stage('Deploy') {
