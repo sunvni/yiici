@@ -23,9 +23,7 @@ pipeline {
         }
         stage('Composer Install') {
             steps {
-                dir("yiici/") {
-                    sh 'composer install --ignore-platform-reqs'
-                }
+                sh 'composer install --ignore-platform-reqs'
             }
         }
         stage('Build') {
