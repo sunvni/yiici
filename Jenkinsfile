@@ -29,12 +29,15 @@ pipeline {
         }
         stage('Composer Install') {
             steps {
-                sh "sudo docker-compose run --rm yiici_php_1 composer install"
+                sh "sudo docker exec yiici_php_1 composer install"
             }
         }
-        stage('Test') {
+        stage('Push Image') {
             steps {
-                sh "sudo docker exec yiici_php_1 composer run-script test"
+                docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {            
+                    app.push("${env.BUILD_NUMBER}")            
+                    app.push("latest")        
+                }
             }
         }
         stage('Deploy') {
