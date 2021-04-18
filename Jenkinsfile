@@ -9,12 +9,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh "docker-compose build"
+                sh "docker-compose up -d"
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh "docker-compose exec composer run-script test"
             }
         }
         stage('Deploy') {
