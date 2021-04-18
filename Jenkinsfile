@@ -13,7 +13,7 @@ pipeline {
         stage("Clone From GitHub") {
            steps {
                 checkout(
-                    [$class: 'GitSCM', branches: [[name: '*/${params.GIT_BRANCH}']],
+                    [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH}"]],
                         doGenerateSubmoduleConfigurations: false,
                         extensions: [],
                         submoduleCfg: [],
