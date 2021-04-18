@@ -27,15 +27,16 @@ pipeline {
                 )
            }
         }
-        stage('Composer Install') {
-            steps {
-                sh 'composer install --ignore-platform-reqs'
-            }
-        }
         stage('Build') {
             steps {
                 sh "sudo docker-compose build"
                 sh "sudo docker-compose up -d"
+
+            }
+        }
+        stage('Composer Install') {
+            steps {
+                sh "sudo docker-compose run --rm yiici_php_1 composer install"
             }
         }
         stage('Test') {
