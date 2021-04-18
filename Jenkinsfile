@@ -6,35 +6,39 @@ pipeline {
         }
     }
     options { timestamps () }
+
     parameters { string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'branch to deploy') }
-    stage("Clone From GitHub") {
-        checkout(
-            [$class: 'GitSCM', branches: [[name: '*/${params.GIT_BRANCH}']],
-                 doGenerateSubmoduleConfigurations: false,
-                 extensions: [],
-                 submoduleCfg: [],
-                 userRemoteConfigs: [[url: 'https://github.com/sunvni/yiici.git']]]
-        )
-    }
-    stage('Composer Install') {
-        dir("yiici/") {
-            sh 'composer install --ignore-platform-reqs'
+
+    stages {
+        stage("Clone From GitHub") {
+            checkout(
+                [$class: 'GitSCM', branches: [[name: '*/${params.GIT_BRANCH}']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[url: 'https://github.com/sunvni/yiici.git']]]
+            )
         }
-    }
-    stage('Build') {
-        steps {
-            sh "sudo docker-compose build"
-            sh "sudo docker-compose up -d"
+        stage('Composer Install') {
+            dir("yiici/") {
+                sh 'composer install --ignore-platform-reqs'
+            }
         }
-    }
-    stage('Test') {
-        steps {
-            sh "sudo docker-compose exec composer run-script test"
+        stage('Build') {
+            steps {
+                sh "sudo docker-compose build"
+                sh "sudo docker-compose up -d"
+            }
         }
-    }
-    stage('Deploy') {
-        steps {
-            echo 'Deploying....'
+        stage('Test') {
+            steps {
+                sh "sudo docker-compose exec composer run-script test"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
         }
     }
 }
