@@ -10,6 +10,11 @@ pipeline {
     parameters { string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'branch to deploy') }
 
     stages {
+        stage("Clean Workspace before build") {
+            steps {
+                cleanWs()
+            }
+        }
         stage("Clone From GitHub") {
            steps {
                 checkout(
