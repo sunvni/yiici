@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh "docker-compose exec composer run-script test"
+                sh "sudo docker-compose exec composer run-script test"
             }
         }
         stage('Deploy') {
