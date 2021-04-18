@@ -1,10 +1,5 @@
 pipeline {
-     agent {
-        node {
-            label 'yiici'
-            customWorkspace '/home/sunvni/workspace'
-        }
-    }
+    agent { label: 'yiici'}
     options { timestamps () }
     stages {
         stage('Build') {
