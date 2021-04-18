@@ -2,15 +2,17 @@ pipeline {
      agent {
         node {
             label 'yiici'
+            customWorkspace '/home/sunvni/workspace'
         }
     }
     options { timestamps () }
     stages {
         stage('Build') {
             steps {
-                sh "pwd"
-                sh "sudo docker-compose build"
-                sh "sudo docker-compose up -d"
+                dir("yiici/") {
+                    sh "sudo docker-compose build"
+                    sh "sudo docker-compose up -d"
+                }
             }
         }
         stage('Test') {
